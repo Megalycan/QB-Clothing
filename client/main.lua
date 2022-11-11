@@ -332,29 +332,29 @@ Citizen.CreateThread(function()
             SetBlipScale (clothingShop, 0.7)
             SetBlipAsShortRange(clothingShop, true)
             BeginTextCommandSetBlipName("STRING")
-            AddTextComponentString("Clothing store")
+            AddTextComponentString("Loja do vestuário")
             EndTextCommandSetBlipName(clothingShop)
         end
 
         if Config.Stores[k].shopType == "barber" then
             local barberShop = AddBlipForCoord(Config.Stores[k].coords)
             SetBlipSprite(barberShop, 71)
-            SetBlipColour(barberShop, 0)
+            SetBlipColour(barberShop, 75)
             SetBlipScale (barberShop, 0.7)
             SetBlipAsShortRange(barberShop, true)
             BeginTextCommandSetBlipName("STRING")
-            AddTextComponentString("Barber")
+            AddTextComponentString("Barbeiro")
             EndTextCommandSetBlipName(barberShop)
         end
 
         if Config.Stores[k].shopType == "surgeon" then
             local surgeonShop = AddBlipForCoord(Config.Stores[k].coords)
             SetBlipSprite(surgeonShop, 71)
-            SetBlipColour(surgeonShop, 0)
+            SetBlipColour(surgeonShop, 69)
             SetBlipScale  (surgeonShop, 0.7)
             SetBlipAsShortRange(surgeonShop, true)
             BeginTextCommandSetBlipName("STRING")
-            AddTextComponentString("Surgeon")
+            AddTextComponentString("Cirurgião")
             EndTextCommandSetBlipName(surgeonShop)
         end
     end
@@ -365,10 +365,10 @@ RegisterNetEvent('qb-clothing:client:getOutfits', function(requiredJob, gradeLev
     if QBCore.Functions.GetPlayerData().charinfo.gender == 1 then gender = "female" end
     QBCore.Functions.TriggerCallback('qb-clothing:server:getOutfits', function(result)
         openMenu({
-            {menu = "roomOutfits", label = "Presets", selected = true, outfits = Config.Outfits[requiredJob][gender][gradeLevel]},
-            {menu = "myOutfits", label = "My Outfits", selected = false, outfits = result},
-            {menu = "character", label = "Clothing", selected = false},
-            {menu = "accessoires", label = "Accessories", selected = false}
+            {menu = "roomOutfits", label = "Predefinições", selected = true, outfits = Config.Outfits[requiredJob][gender][gradeLevel]},
+            {menu = "myOutfits", label = "As Minhas Roupas", selected = false, outfits = result},
+            {menu = "character", label = "Vestuário", selected = false},
+            {menu = "accessoires", label = "Acessórios", selected = false}
         })
     end)
 end)
@@ -383,34 +383,34 @@ if Config.UseTarget then
                     action = function()
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Hair", selected = true},
+                            {menu = "clothing", label = "Cabelo", selected = true},
                         })
                     end,
                     icon = "fas fa-chair-office",
-                    label = "Barber",
+                    label = "Barbeiro",
                 }
             elseif v.shopType == 'clothing' then
                 opts = {
                     action = function()
                         customCamLocation = nil
                         openMenu({
-                            {menu = "character", label = "Clothing", selected = true},
-                            {menu = "accessoires", label = "Accessories", selected = false}
+                            {menu = "character", label = "Roupa", selected = true},
+                            {menu = "accessoires", label = "Acessórios", selected = false}
                         })
                     end,
                     icon = "fas fa-clothes-hanger",
-                    label = "Clothing Store",
+                    label = "Loja do vestuário",
                 }
             elseif v.shopType == 'surgeon' then
                 opts = {
                     action = function()
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Features", selected = true},
+                            {menu = "clothing", label = "Características", selected = true},
                         })
                     end,
                     icon = "fas fa-scalpel",
-                    label = "Plastic Surgeon",
+                    label = "Cirurgião Plástico",
                 }
             end
 
@@ -459,7 +459,7 @@ if Config.UseTarget then
                         type = "client",
                         action = action,
                         icon = "fas fa-sign-in-alt",
-                        label = "Clothing",
+                        label = "Roupa",
                         job = v.requiredJob
                     },
                 },
@@ -487,11 +487,11 @@ else
                 zoneName = zone.name
                 inZone = true
                 if zoneName == 'surgeon' then
-                    exports['qb-core']:DrawText('[E] - Plastic Surgery', 'left')
+                    exports['qb-core']:DrawText('[E] - Cirurgia Plástica', 'left')
                 elseif zoneName == 'clothing' then
-                    exports['qb-core']:DrawText('[E] - Clothing Shop', 'left')
+                    exports['qb-core']:DrawText('[E] - Loja do vestuário', 'left')
                 elseif zoneName == 'barber' then
-                    exports['qb-core']:DrawText('[E] - Barber', 'left')
+                    exports['qb-core']:DrawText('[E] - Barbeiro', 'left')
                 end
             else
                 inZone = false
@@ -518,7 +518,7 @@ else
                 if (job == Config.ClothingRooms[zoneID].requiredJob) then
                     zoneName = zoneID
                     inZone = true
-                    exports['qb-core']:DrawText('[E] - Clothing Shop', 'left')
+                    exports['qb-core']:DrawText('[E] - Loja do vestuário', 'left')
                 end
             else
                 inZone = false
@@ -538,22 +538,22 @@ else
                     if IsControlJustReleased(0, 38) then
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Features", selected = true},
+                            {menu = "clothing", label = "Características", selected = true},
                         })
                     end
                 elseif zoneName == 'clothing' then
                     if IsControlJustReleased(0, 38) then
                         customCamLocation = nil
                         openMenu({
-                            {menu = "character", label = "Clothing", selected = true},
-                            {menu = "accessoires", label = "Accessories", selected = false}
+                            {menu = "character", label = "Roupa", selected = true},
+                            {menu = "accessoires", label = "Acessórios", selected = false}
                         })
                     end
                 elseif zoneName == 'barber' then
                     if IsControlJustReleased(0, 38) then
                         customCamLocation = nil
                         openMenu({
-                            {menu = "clothing", label = "Hair", selected = true},
+                            {menu = "clothing", label = "Cabelo", selected = true},
                         })
                     end
                 else
@@ -574,7 +574,7 @@ end
 RegisterNetEvent('qb-clothing:client:openOutfitMenu', function()
     QBCore.Functions.TriggerCallback('qb-clothing:server:getOutfits', function(result)
         openMenu({
-            {menu = "myOutfits", label = "My Outfits", selected = true, outfits = result},
+            {menu = "myOutfits", label = "As Minhas Roupas", selected = true, outfits = result},
         })
     end)
 end)
@@ -664,9 +664,9 @@ RegisterNetEvent('qb-clothing:client:openMenu')
 AddEventHandler('qb-clothing:client:openMenu', function()
     customCamLocation = nil
     openMenu({
-        {menu = "character", label = "Character", selected = true},
-        {menu = "clothing", label = "Features", selected = false},
-        {menu = "accessoires", label = "Accessories", selected = false}
+        {menu = "character", label = "Personagem", selected = true},
+        {menu = "clothing", label = "Características", selected = false},
+        {menu = "accessoires", label = "Acessórios", selected = false}
     })
 end)
 
@@ -827,7 +827,7 @@ function openMenu(allowedMenus)
 end
 
 RegisterNUICallback('TrackerError', function(_, cb)
-    QBCore.Functions.Notify("You can't remove your ankle bracelet ..", "error")
+    QBCore.Functions.Notify("Não se pode retirar a pulseira de tornozelo ..", "error")
     cb('ok')
 end)
 
@@ -1081,7 +1081,7 @@ end)
 
 RegisterNUICallback('removeOutfit', function(data, cb)
     TriggerServerEvent('qb-clothing:server:removeOutfit', data.outfitName, data.outfitId)
-    QBCore.Functions.Notify("You have deleted your"..data.outfitName.." outfit!")
+    QBCore.Functions.Notify("Apagou o seu"..data.outfitName.." vestuário!")
     cb('ok')
 end)
 
@@ -1622,9 +1622,9 @@ AddEventHandler('qb-clothes:client:CreateFirstCharacter', function()
     QBCore.Functions.GetPlayerData(function(pData)
         local skin = "mp_m_freemode_01"
         openMenu({
-            {menu = "character", label = "Character", selected = true},
-            {menu = "clothing", label = "Features", selected = false},
-            {menu = "accessoires", label = "Accessories", selected = false}
+            {menu = "character", label = "Personagem", selected = true},
+            {menu = "clothing", label = "Características", selected = false},
+            {menu = "accessoires", label = "Acessórios", selected = false}
         })
 
         if pData.charinfo.gender == 1 then
@@ -1938,7 +1938,7 @@ AddEventHandler('qb-clothing:client:loadOutfit', function(oData)
     end
 
     if oData.outfitName ~= nil then
-        QBCore.Functions.Notify("You have chosen "..oData.outfitName.."! Press Confirm to confirm outfit.")
+        QBCore.Functions.Notify("Escolheu "..oData.outfitName.."! Pressione Confirmar para selecionar o equipamento.")
     end
 end)
 
